@@ -26,7 +26,12 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
    kk apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/refs/tags/v2.14.11/manifests/install.yaml
    ```
 
-5. Verify ArgoCD installation and set up port forwarding:
+5. Patch ArgoCD config for faster reconciliation:
+   ```bash
+   kk -n argocd patch configmap argocd-cm --type merge -p '{"data":{"timeout.reconciliation":"180s"}}'
+   ```
+
+6. Verify ArgoCD installation and set up port forwarding:
    ```bash
    # Check all ArgoCD resources
    kk -n argocd get all
@@ -38,7 +43,7 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
    kk -n argocd port-forward service/argocd-server 8443:443
    ```
 
-6. Retrieve the initial admin password:
+7. Retrieve the initial admin password:
    ```bash
    kk -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
    ```
@@ -89,7 +94,7 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
 
 ## Deploying Applications
 
-After adding the test cluster to ArgoCD, you can deploy applications to it using ArgoCD. This can be done either through:
+After adding the test and Kwok clusters to ArgoCD, you can deploy applications to them using ArgoCD. This can be done either through:
 
 1. The ArgoCD UI
 2. ArgoCD CLI commands
