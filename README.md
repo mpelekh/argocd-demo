@@ -77,6 +77,11 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
    kwokctl scale node --replicas=100
    ```
 
+4. Add the Kwok cluster to ArgoCD declaratively:
+   ```bash
+   kk apply -f argocd/kwok-cluster-secret.yaml
+   ```
+
 ## Deploying Applications
 
 After adding the test cluster to ArgoCD, you can deploy applications to it using ArgoCD. This can be done either through:
