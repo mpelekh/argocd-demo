@@ -60,6 +60,11 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
    kk apply -f argocd/test-cluster-secret.yaml
    ```
 
+4. Add the Kwok cluster to ArgoCD declaratively:
+   ```bash
+   kk apply -f argocd/kwok-cluster-secret.yaml
+   ```
+
 ### Kwok Cluster Setup (Demo)
 
 1. Create a Kwok cluster for demo purposes:
@@ -90,9 +95,9 @@ After adding the test cluster to ArgoCD, you can deploy applications to it using
 2. ArgoCD CLI commands
 3. Declarative configuration files
 
-Example of deploying an application using a declarative configuration:
+Example of deploying the demo application:
 ```bash
-kk apply -f applications/your-application.yaml
+kk apply -f argocd/application/demo-app.yaml
 ```
 
-The application will be deployed to the test cluster, and ArgoCD will continuously monitor and reconcile the desired state.
+The application will be deployed to the kwok cluster, and ArgoCD will continuously monitor and reconcile the desired state.

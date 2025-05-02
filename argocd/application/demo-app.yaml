@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8s-demo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mpelekh/argocd-demo.git
+    targetRevision: HEAD
+    path: helm-charts/k8s-demo-chart
+    helm:
+      valueFiles:
+        - values.yaml
+      values: |
+        replicaCount: 10
+        image:
+          repository: pause
+          tag: "3.6"
+          pullPolicy: IfNotPresent
+        deployment:
+          enabled: true
+        configmap:
+          enabled: true
+          count: 5
+        secret:
+          enabled: true
+        svc:
+          enabled: true
+        serviceAccount:
+          create: false
+  destination:
+    name: kwok-cluster
+    namespace: demo-apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  info:
+    - name: Description
+      value: Demo application with ConfigMap, Deployment, Secret, and Service
