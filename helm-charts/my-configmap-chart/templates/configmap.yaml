@@ -1,0 +1,16 @@
+{{- if .Values.configmap.enabled }}
+{{- range $i := until (.Values.configmap.count | int)}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "configmap.name" $ }}-{{ $i }}
+  labels:
+    app: {{ $.Chart.Name }}
+    release: {{ $.Release.Name }}
+data:
+{{- range $key, $value := $.Values.configData }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}
+{{- end }} 

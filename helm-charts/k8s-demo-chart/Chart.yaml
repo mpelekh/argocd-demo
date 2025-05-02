@@ -1,0 +1,6 @@
+apiVersion: v2
+name: k8s-demo-chart
+description: A Helm chart for Kubernetes with ConfigMap, Deployment, Secret, and Service
+type: application
+version: 0.1.0
+appVersion: "1.0.0" 
