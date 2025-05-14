@@ -74,7 +74,7 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
 
 2. Set up kubectl alias for the Kwok cluster:
    ```bash
-   alias kw="kubectl --context kwok-cluster"
+   alias kw="kubectl --context kwok-kwok-cluster"
    ```
 
 3. Scale the number of nodes in the Kwok cluster:
