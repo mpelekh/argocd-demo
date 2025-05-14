@@ -13,7 +13,6 @@ spec:
       valueFiles:
         - values.yaml
       values: |
-        replicaCount: 10
         image:
           repository: pause
           tag: "3.6"
