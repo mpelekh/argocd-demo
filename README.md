@@ -65,11 +65,6 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
    kk apply -f argocd/test-cluster-secret.yaml
    ```
 
-4. Add the Kwok cluster to ArgoCD declaratively:
-   ```bash
-   kk apply -f argocd/kwok-cluster-secret.yaml
-   ```
-
 ### Kwok Cluster Setup (Demo)
 
 1. Create a Kwok cluster for demo purposes:
