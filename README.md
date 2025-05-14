@@ -69,7 +69,7 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
 
 1. Create a Kwok cluster for demo purposes:
    ```bash
-   kwokctl create cluster --runtime=kind
+   kwokctl create cluster --name=kwok-cluster --runtime=kind
    ```
 
 2. Set up kubectl alias for the Kwok cluster:
