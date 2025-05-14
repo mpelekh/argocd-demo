@@ -28,7 +28,9 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
 
 5. Patch ArgoCD config for faster reconciliation:
    ```bash
-   kk -n argocd patch configmap argocd-cm --type merge -p '{"data":{"timeout.reconciliation":"180s"}}'
+   kk -n argocd patch configmap argocd-cm --type merge -p '{"data":{"timeout.reconciliation":"20s"}}'
+   kk -n argocd rollout restart sts argocd-application-controller
+   kk -n argocd rollout restart deployment argocd-repo-server
    ```
 
 6. Verify ArgoCD installation and set up port forwarding:
@@ -79,7 +81,7 @@ This repository contains a demo setup for ArgoCD using Kind clusters.
 
 3. Scale the number of nodes in the Kwok cluster:
    ```bash
-   kwokctl scale node --replicas=100
+   kwokctl scale node --replicas=100 --name kwok-cluster
    ```
 
 4. Add the Kwok cluster to ArgoCD declaratively:
